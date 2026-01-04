@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finalize ebs TV</title>
+    <link rel="stylesheet" href="/style/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">ebs<span>TV</span></div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="/pages/news/index.html">News</a></li>
+        <li><a href="#">Schedule</a></li>
+        <li><a href="#">Shows</a></li>
+        <li><a href="#">Extra</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Shop</a></li>
+      </ul>
+    </nav>
+
+    <section class="banner" id="banner">
+      <div class="banner-content">
+        <h1 id="banner-title">Loading Show...</h1>
+        <p id="banner-desc">Stay tuned for the best entertainment.</p>
+        <button class="btn-primary">Watch Now</button>
+      </div>
+      <div class="banner-controls">
+        <button onclick="prevSlide()">&#10094;</button>
+        <button onclick="nextSlide()">&#10095;</button>
+      </div>
+    </section>
+
+    <main class="main-container">
+      <section class="main-left">
+        <div class="top-story card">
+          <img
+            src="https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=1200"
+            alt="Top Story"
+          />
+          <div class="card-body">
+            <h2>TOP STORIES: The Future of Cinema</h2>
+            <p class="text-collapse" id="story-text">
+              The entertainment industry is undergoing a massive shift as
+              digital streaming meets high-fidelity virtual reality. In this
+              exclusive report, we look at how directors are changing the way
+              they tell stories for the modern era...
+              <span id="more-text" class="hidden"
+                >This involves new camera technologies, interactive scripts
+                where viewers choose their own endings, and immersive audio that
+                places the audience right in the middle of the action.</span
+              >
+            </p>
+            <button class="btn-read" onclick="toggleReadMore()">
+              Read More
+            </button>
+          </div>
+        </div>
+
+        <h3 class="section-title">What is Next</h3>
+        <div class="next-grid">
+          <div class="card">
+            <img
+              src="/images/ebsimages/seyifu.webp"
+              alt="Next 1"
+            />
+            <div class="card-body">
+              <h4>Seifu ao ebs</h4>
+              <p>Starting at 10:00 PM</p>
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="/images/ebsimages/helen.jpeg"
+              alt="Next 2"
+            />
+            <div class="card-body">
+              <h4>Action Hour</h4>
+              <p>Starting at 11:30 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="horizontal-card card">
+          <img
+            src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=300"
+            alt="Side"
+          />
+          <div class="card-body">
+            <h3>Behind the Scenes</h3>
+            <p>Go backstage with the cast of our hit series "The Grid".</p>
+          </div>
+        </div>
+
+        <h3 class="section-title">New on Playlist</h3>
+        <div class="playlist-grid">
+          <div class="card">
+            <img src="https://via.placeholder.com/300x180/222" alt="P1" />
+            <h4>Music Awards</h4>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/300x180/333" alt="P2" />
+            <h4>Urban Beats</h4>
+          </div>
+          <div class="card">
+            <img src="https://via.placeholder.com/300x180/444" alt="P3" />
+            <h4>Classic Soul</h4>
+          </div>
+        </div>
+      </section>
+
+      <aside class="main-right">
+        <div class="now-on card spacer">
+          <img
+            src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=400"
+            alt="Now"
+          />
+          <div class="card-body">
+            <h3>On Our Channel Now</h3>
+            <p class="dim">Cooking with Stars</p>
+            <hr />
+            <p><strong>Next:</strong> 06:00 PM - Daily News</p>
+            <p><strong>Upcoming:</strong> 07:30 PM - Weather</p>
+            <button class="btn-full">Full Schedule</button>
+            <button class="btn-outline">Where to Watch</button>
+          </div>
+        </div>
+
+        <div class="logo-carousel card spacer" id="logo-carousel">
+          <div class="card-body">
+            <div class="carousel-nav">
+              <button class="nav-arrow" onclick="prevLogo()">&#10094;</button>
+
+              <div class="logo-display">
+                <div class="big-logo" id="big-logo">TV</div>
+                <div class="small-logo" id="small-logo">S1</div>
+              </div>
+
+              <button class="nav-arrow" onclick="nextLogo()">&#10095;</button>
+            </div>
+
+            <ul id="logo-list">
+              <li>HD Quality</li>
+              <li>Live Chat</li>
+              <li>Exclusive</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ad-card card spacer">
+          <div class="ad-box">AD</div>
+          <p>Want to see your brand here?</p>
+          <button class="btn-sm">Advertise Now</button>
+        </div>
+      </aside>
+    </main>
+
+    <section class="foryou">
+      <h2 class="section-title">For You</h2>
+      <div class="foryou-grid">
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600"
+            alt="FY1"
+          />
+          <div class="card-body"><h3>Documentaries You'll Love</h3></div>
+        </div>
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1509281373149-e957c6296406?auto=format&fit=crop&w=600"
+            alt="FY2"
+          />
+          <div class="card-body"><h3>Top Rated Thrillers</h3></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shop">
+      <h2 class="section-title">TV Station Shop</h2>
+      <div class="shop-grid">
+        <div class="shop-item">
+          <img
+            src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=250"
+            alt="S1"
+          />
+          <h4>Logo Tee</h4>
+          <p class="price">$25.00</p>
+        </div>
+        <div class="shop-item">
+          <img
+            src="https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=250"
+            alt="S2"
+          />
+          <h4>Branded Cap</h4>
+          <p class="price">$15.00</p>
+        </div>
+        <div class="shop-item">
+          <img
+            src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=250"
+            alt="S3"
+          />
+          <h4>Ceramic Mug</h4>
+          <p class="price">$12.00</p>
+        </div>
+        <div class="shop-item">
+          <img
+            src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=250"
+            alt="S4"
+          />
+          <h4>Black Hoodie</h4>
+          <p class="price">$45.00</p>
+        </div>
+      </div>
+      <button class="btn-show-more">Show More</button>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>StreamLine TV</h3>
+          <p>Global entertainment hub for movies, series, and live events.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow</h4>
+          <div class="socials">
+            <a href="#">FB</a> | <a href="#">TW</a> | <a href="#">IG</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2024 StreamLine TV Network. All Rights Reserved.
+      </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

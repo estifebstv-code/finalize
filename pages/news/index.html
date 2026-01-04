@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS News</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 🔴 Breaking News Ticker -->
+    <div class="ticker-wrap">
+        <div class="ticker-label">Breaking News</div>
+        <div class="ticker-content">
+            <div class="ticker-scroll" id="ticker-scroll">
+                Loading latest headlines...
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 📌 Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h3>Categories</h3>
+                <ul id="category-list">
+                    <li><a class="cat-link active" data-category="all">All News</a></li>
+                    <li><a class="cat-link" data-category="tech">#Tech</a></li>
+                    <li><a class="cat-link" data-category="business">#Business</a></li>
+                    <li><a class="cat-link" data-category="world">#World</a></li>
+                </ul>
+
+                <button id="refresh-btn" class="refresh-btn">
+                    🔄 Refresh Feed
+                </button>
+            </div>
+        </aside>
+
+        <!-- 📰 Main Feed -->
+        <main class="news-feed">
+
+            <!-- Skeleton -->
+            <div id="skeleton-screen">
+                <div class="skeleton-hero"></div>
+                <div class="skeleton-grid">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div id="main-content" style="display:none;">
+                <div id="hero-area"></div>
+                <div class="news-grid" id="news-grid"></div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button id="prev-btn" class="page-btn" disabled>
+                    Previous
+                </button>
+                <span id="page-number">Page 1</span>
+                <button id="next-btn" class="page-btn">
+                    Next
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- 🧾 Modal -->
+    <div id="news-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+
+            <!-- JS injects content here -->
+            <div id="modal-body"></div>
+
+            <div class="modal-nav">
+                <button id="modal-prev" class="modal-btn">
+                    ← Previous
+                </button>
+                <button id="modal-next" class="modal-btn">
+                    Next →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ Uses my Telegram JS -->
+    <script src="script.js"></script>
+</body>
+</html>
