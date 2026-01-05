@@ -5,10 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finalize ebs TV</title>
     <link rel="stylesheet" href="/style/style.css" />
+        <meta
+      name="keywords"
+      content="ebs, ebstv, ebs cinema,classic, TV, television, broadcast, show, watch, westerns, seifu ,seifufantahun, ehud, flintstones, star, entertainment,  drama, comedy, network, antenna, kidame, arada, helen, tech, solomon, news, keseat, entewawekalen , afalgugn, "
+    />
+    <meta
+      name="description"
+      content="Watch ebs for memorable entertainment television from Ethiopia's #1 classic television network. Airing on different classic TV series each week, from drama and comedy to sci fi, ebs is available nationwide for free with an antenna, and is available on roku.  Find out where to watch ebs, check our television schedule, and explore nostalgic content, quizzes, videos and more on ebstv.tv."
+    />
   </head>
   <body>
     <nav class="navbar">
-      <div class="logo">ebs<span>TV</span></div>
+      <div class="logo"> <a href="/">
+        <img  src="/images/ebsimages/cropped-EBS-Logo.png" alt="ebs logo">
+         <!-- ebs<span>TV</span> -->
+        </div>
+      </a>
       <ul class="nav-links">
         <li><a href="#">Home</a></li>
         <li><a href="/pages/news/index.html">News</a></li>
@@ -31,10 +43,18 @@
         <button onclick="nextSlide()">&#10095;</button>
       </div>
     </section>
-
     <main class="main-container">
       <section class="main-left">
-        <div class="top-story card">
+        <!-- ********** -->
+         <div id="home-news"></div>
+  
+  <script type="module">
+      import { displayNews } from './store/NewsComponent.js';
+      // Show 3 items on the home page
+      displayNews('home-news', 1);
+  </script>
+        <!-- ********** -->
+        <!-- <div class="top-story card">
           <img
             src="https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=1200"
             alt="Top Story"
@@ -56,7 +76,7 @@
               Read More
             </button>
           </div>
-        </div>
+        </div> -->
 
         <h3 class="section-title">What is Next</h3>
         <div class="next-grid">

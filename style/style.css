@@ -1,7 +1,7 @@
 :root {
     /* --bg: #0a0a0a; */
     --card: #181818;
-    --primary: #ff4d4d;
+    --primary: #f87133;
     --text: #ffffff;
     --text-dim: #999;
 }
@@ -30,6 +30,7 @@ body {
 
 .logo { font-size: 1.5rem; font-weight: bold; letter-spacing: 2px; }
 .logo span { color: var(--primary); }
+.logo img { width: 2em !important; }
 .nav-links { list-style: none; display: flex; gap: 2rem; }
 .nav-links a { text-decoration: none; color: white; transition: 0.3s; }
 .nav-links a:hover { color: var(--primary); }
