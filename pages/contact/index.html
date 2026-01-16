@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - TV Station</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style/style.css" />
+</head>
+<body>
+
+        <nav class="navbar">
+      <div class="logo"> <a href="/">
+        <img  src="/images/ebsimages/cropped-EBS-Logo.png" alt="ebs logo">
+         <!-- ebs<span>TV</span> -->
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/pages/news/index.html">News</a></li>
+        <li><a href="#">Schedule</a></li>
+        <li><a href="#">Shows</a></li>
+        <li><a href="#">Extra</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="/pages/contact/index.html">Contact</a></li>
+      </ul>
+    </nav>
+    <section class="body-two">
+
+   
+  <!-- Banner -->
+  <header class="contact-banner fade-in">
+    <h1>Contact Our TV Station</h1>
+    <p>Your feedback, ideas, and inquiries help us grow.</p>
+  </header>
+
+  <!-- Contact Info + Map -->
+  <section class="contact-info fade-in">
+    <div class="info-card">
+      <h2>Get In Touch</h2>
+      <p><strong>Phone:</strong> +251 900 000 000</p>
+      <p><strong>Email:</strong> contact@yourtvstation.com</p>
+      <p><strong>Address:</strong> Addis Ababa, Ethiopia</p>
+      <p><strong>Working Hours:</strong> Mon - Fri | 9AM - 6PM</p>
+    </div>
+
+    <div class="map-container">
+      <iframe src="https://maps.google.com/maps?q=addis%20ababa&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+    </div>
+  </section>
+
+  <!-- Message Form -->
+  <section class="contact-form-section fade-in">
+    <h2>Send Us a Message</h2>
+
+    <form id="contactForm" class="contact-form">
+
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="name" required />
+      </div>
+
+      <div class="form-group">
+        <label>Your Email</label>
+        <input type="email" id="email" required />
+      </div>
+
+      <div class="form-group">
+        <label>Subject</label>
+        <input type="text" id="subject" required />
+      </div>
+
+      <div class="form-group full">
+        <label>Your Message</label>
+        <textarea id="message" required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Send Message</button>
+      <p id="formStatus" class="status"></p>
+
+    </form>
+  </section>
+ </section>
+  <script src="script.js"></script>
+</body>
+</html>

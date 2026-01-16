@@ -1,0 +1,135 @@
+.body-two {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: #f9f9f9;
+  color: #333;
+}
+
+/* Banner */
+.contact-banner {
+  width: 100%;
+  height: 50vh;
+  background: url('/images/ebsimages/banner.jpeg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  text-align: center;
+  padding: 20px;
+}
+
+.contact-banner h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.contact-banner p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin-top: 10px;
+}
+
+/* Info + Map */
+
+.contact-info {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.info-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+  border-radius: 12px;
+}
+
+/* Form */
+.contact-form-section {
+  max-width: 900px;
+  margin: 40px auto 80px;
+  padding: 20px;
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+input, textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-top: 5px;
+  font-size: 1rem;
+  background: #fff;
+}
+
+textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.submit-btn {
+  grid-column: 1 / -1;
+  padding: 14px;
+  background: #e46708;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background: #ff7000;
+}
+
+/* Status message */
+.status {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.7s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile fixes */
+@media (max-width: 600px) {
+  .contact-banner h1 { font-size: 2rem; }
+  .contact-banner p { font-size: 1rem; }
+}

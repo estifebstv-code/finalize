@@ -95,6 +95,10 @@ body {
 .horizontal-card img { width: 40%; height: 200px; }
 .playlist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
 
+.section-title {
+    color: #000;
+}
+
 /* RIGHT SIDEBAR */
 
 /* main right */

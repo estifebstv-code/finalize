@@ -24,7 +24,7 @@ setInterval(nextSlide, 5000);
 
 // 2. LOGO CAROUSEL LOGIC
 const logos = [
-    { big: "TV", small: "S1", list: ["HD Quality", "Live Chat", "Exclusive"] },
+    { big: "/images/ebsnewmini/cinemalogo.png", small: "S1", list: ["HD Quality", "New Movies", "Onscreen"] },
     { big: "SP", small: "S2", list: ["Pro Sports", "Real-time", "4K Feed"] },
     { big: "NW", small: "S3", list: ["Global News", "24/7", "Local"] }
 ];
@@ -37,7 +37,7 @@ logoBox.addEventListener('mouseenter', () => clearInterval(logoInterval));
 logoBox.addEventListener('mouseleave', () => logoInterval = setInterval(nextLogo, 3000));
 
 function updateLogo() {
-    document.getElementById('big-logo').innerText = logos[logoIndex].big;
+    document.getElementById('big-logo').img = logos[logoIndex].big;
     document.getElementById('small-logo').innerText = logos[logoIndex].small;
     const list = document.getElementById('logo-list');
     list.innerHTML = logos[logoIndex].list.map(item => `<li>${item}</li>`).join('');
