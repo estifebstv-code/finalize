@@ -1,0 +1,207 @@
+:root { --yt-red: #ff0000; --bg: #f9f9f9; }
+body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; }
+.container { max-width: 1100px; margin: auto; }
+
+header { text-align: center; margin-bottom: 40px; }
+#backBtn { cursor: pointer; padding: 8px 16px; border: none; background: #333; color: #fff; border-radius: 4px; margin-bottom: 10px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+
+/* Card Styling */
+.card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; }
+.card-header { padding: 15px; font-weight: bold; font-size: 1.1rem; min-height: 50px; }
+
+/* Video/Thumbnail Container */
+.media-container { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; cursor: pointer; }
+.media-container img { width: 100%; height: 100%; object-fit: cover; }
+.media-container iframe { width: 100%; height: 100%; border: none; }
+
+.card-body { padding: 15px; font-size: 0.9rem; color: #555; flex-grow: 1; }
+
+#loadMoreBtn { display: block; margin: 40px auto; padding: 12px 30px; background: var(--yt-red); color: #fff; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; }
+
+.search-box {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#searchInput {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#searchInput:focus {
+    border-color: #ff0000;
+}
+
+/* ******************************************* */
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #f7f7f7;
+  color: #222;
+}
+
+/* BANNER */
+.page-banner {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.page-banner .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.banner-content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.banner-content h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+
+.banner-content p {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+/* SECTIONS */
+.section-container {
+  width: 90%;
+  max-width: 1300px;
+  margin: 60px auto;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background: #ff7000;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  border-radius: 3px;
+}
+
+/* FILTER BUTTONS */
+.filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.filter-btn {
+  padding: 10px 22px;
+  border: none;
+  background: #e1e1e1;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #ff7000;
+  color: #fff;
+}
+
+/* SHOWS GRID */
+.shows-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.show-card {
+  background: #f7b476;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.show-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.show-content {
+  padding: 20px;
+}
+
+.show-content h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.show-content p {
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+.show-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* FADE IN ANIMATION */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.7s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .banner-content h1 {
+    font-size: 2rem;
+  }
+  .banner-content p {
+    font-size: 0.95rem;
+  }
+}

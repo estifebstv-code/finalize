@@ -34,7 +34,7 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--light-bg);
 .news-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 .news-card img { width: 100%; height: 180px; object-fit: cover; }
 .card-body { padding: 20px; }
-.card-body h2 { font-size: 1.1rem; margin-top: 0; margin-bottom: 15px; line-height: 1.4; height: 3em; overflow: hidden; }
+.card-body h2 { font-size: 1.1rem; margin-top: 0; margin-bottom: 15px; line-height: 1.4; height: 3em; overflow: hidden; color: #1a1a1a;}
 .read-more-btn { background: var(--dark); color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
 .read-more-btn:hover { background: var(--primary); }
 
@@ -46,7 +46,7 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--light-bg);
 /* MODAL */
 .modal-overlay {margin-top: 30px; display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
 .modal-content { background: white; margin: 50px auto; width: 90%; max-width: 750px; border-radius: 12px; padding: 40px; position: relative; max-height: 85vh; overflow-y: auto; }
-.close-modal { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; }
+.close-modal { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; color: #1a1a1a; }
 .modal-nav { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; margin-bottom: 10px; }
 .modal-btn { padding: 10px 20px; background: var(--dark); color: white; border: none; border-radius: 5px; cursor: pointer; }
 .modal-btn:disabled { opacity: 0.3; cursor: not-allowed; }
