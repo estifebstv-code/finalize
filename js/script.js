@@ -1,6 +1,6 @@
 // 1. BANNER AUTO-SLIDE DATA
 const slides = [
-    { title: "YOUR NUMBER ONE CHOISE", desc: "From Addis Ababa, the biggest celebrities join us.", img: "/images/ebsimages/banner.jpeg" },
+    { title: "YOUR NUMBER ONE CHOISE", desc: "From Addis Ababa, the biggest celebrities join us.", img: "/images/ebsimages/1334x300home_banner.jpg" },
     { title: "Sitcom Weekly", desc: "Catch all the episodes .", img: "/images/ebsimages/besentu.jpeg" },
     { title: "Where to watch ", desc: "Watch anytime anywhere.", img: "/images/ebsimages/Roku.jpeg" }
 ];

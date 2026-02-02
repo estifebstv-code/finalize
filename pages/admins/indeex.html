@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickShop | Advanced Cart</title>
+    <style>
+        :root {
+            --primary: #0088cc;
+            --dark: #1d2733;
+            --light: #f4f4f9;
+            --white: #ffffff;
+            --danger: #ff4d4d;
+            --success: #2ecc71;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--light);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        header {
+            background: var(--dark);
+            color: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 90%;
+            z-index: 1000;
+        }
+
+        .cart-status {
+            background: var(--primary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* --- Product Grid --- */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 20px 5%;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .product-card:hover { transform: translateY(-5px); }
+        .product-image { font-size: 3.5rem; margin-bottom: 10px; }
+
+        .add-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* --- Modals --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            z-index: 2000;
+            backdrop-filter: blur(3px);
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            width: 90%;
+            max-width: 450px;
+            border-radius: 20px;
+            display: none;
+            z-index: 2001;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .modal.active { display: block; }
+
+        /* --- Cart Items Styling --- */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            background: #eee;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .remove-icon {
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        /* --- Checkout Form --- */
+        .checkout-form input, .checkout-form select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .checkout-btn { background: var(--success); color: white; }
+        .pay-btn { background: var(--primary); color: white; }
+
+        .hidden { display: none; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2>QuickShop</h2>
+        <div class="cart-status" onclick="openCart()">
+            🛒 <span id="cart-count">0</span> Items
+        </div>
+    </header>
+
+    <div class="container" id="product-grid"></div>
+
+    <div class="modal-overlay" id="overlay" onclick="closeAll()"></div>
+
+    <div class="modal" id="cart-modal">
+        <h3>Your Shopping Bag</h3>
+        <div id="cart-items-list"></div>
+        <div style="margin-top: 20px;">
+            <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem;">
+                <span>Total:</span>
+                <span id="cart-total">$0</span>
+            </div>
+            <button class="action-btn checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <div class="modal" id="checkout-modal">
+        <h3>Delivery & Payment</h3>
+        <form class="checkout-form" onsubmit="handlePayment(event)">
+            <label>Delivery Address</label>
+            <input type="text" placeholder="123 Street Name, City" required>
+            
+            <label>Delivery Service</label>
+            <select>
+                <option>Standard (3-5 days) - Free</option>
+                <option>Express (Next Day) - $10.00</option>
+            </select>
+
+            <hr>
+            <label>Payment Method</label>
+            <select id="payment-method">
+                <option value="card">Credit/Debit Card</option>
+                <option value="crypto">Telegram Wallet (TON)</option>
+                <option value="paypal">PayPal</option>
+            </select>
+            
+            <input type="text" placeholder="Card Number / Wallet Address" required>
+            
+            <button type="submit" class="action-btn pay-btn">Complete Purchase</button>
+        </form>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, name: "Premium Lens", price: 300, emoji: "📷" },
+            { id: 2, name: "Data Tablet", price: 450, emoji: "平板" },
+            { id: 3, name: "Power Bank", price: 50, emoji: "🔋" },
+            { id: 4, name: "Smart Lamp", price: 80, emoji: "💡" }
+        ];
+
+        let cart = [];
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = products.map(p => `
+                <div class="product-card">
+                    <div class="product-image">${p.emoji}</div>
+                    <h3>${p.name}</h3>
+                    <p>$${p.price}</p>
+                    <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(id) {
+            const item = cart.find(p => p.id === id);
+            if (item) {
+                item.quantity++;
+            } else {
+                const product = products.find(p => p.id === id);
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateUI();
+        }
+
+        function updateQuantity(id, change) {
+            const item = cart.find(p => p.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) removeItem(id);
+            }
+            updateUI();
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(p => p.id !== id);
+            updateUI();
+        }
+
+        function updateUI() {
+            const list = document.getElementById('cart-items-list');
+            const totalDisplay = document.getElementById('cart-total');
+            const countDisplay = document.getElementById('cart-count');
+            
+            let total = 0;
+            let count = 0;
+
+            list.innerHTML = cart.map(item => {
+                total += item.price * item.quantity;
+                count += item.quantity;
+                return `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            <small>$${item.price} each</small>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <span class="remove-icon" onclick="removeItem(${item.id})">🗑️</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            if(cart.length === 0) list.innerHTML = "<p>Your cart is empty.</p>";
+            
+            totalDisplay.innerText = `$${total}`;
+            countDisplay.innerText = count;
+        }
+
+        function openCart() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('cart-modal').classList.add('active');
+        }
+
+        function openCheckout() {
+            if (cart.length === 0) return alert("Add items first!");
+            document.getElementById('cart-modal').classList.remove('active');
+            document.getElementById('checkout-modal').classList.add('active');
+        }
+
+        function closeAll() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('cart-modal').classList.remove('active');
+            document.getElementById('checkout-modal').classList.remove('active');
+        }
+
+        function handlePayment(e) {
+            e.preventDefault();
+            alert("🚀 Order Placed Successfully! Your items are on the way.");
+            cart = [];
+            updateUI();
+            closeAll();
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>

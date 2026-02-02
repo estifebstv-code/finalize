@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin | Stock & Image Manager</title>
+    <style>
+        :root { --primary: #0088cc; --dark: #1d2733; --light: #f4f4f9; }
+        body { font-family: sans-serif; background: var(--light); padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 12px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        input { padding: 10px; border: 1px solid #ddd; border-radius: 5px; width: 100%; box-sizing: border-box; }
+        button { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border-bottom: 1px solid #eee; padding: 12px; text-align: left; }
+        .img-preview { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Add New Product to Inventory</h2>
+    <form id="admin-form">
+        <div class="form-grid">
+            <input type="text" id="name" placeholder="Product Name" required>
+            <input type="number" id="price" placeholder="Price ($)" required>
+            <input type="text" id="imgUrl" placeholder="Image URL (e.g. https://images.unsplash.com/...)" required>
+            <input type="number" id="stock" placeholder="Initial Stock Quantity" required>
+        </div>
+        <button type="submit">Add Product</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="inventory-list"></tbody>
+    </table>
+</div>
+
+<script>
+    const form = document.getElementById('admin-form');
+    let products = JSON.parse(localStorage.getItem('shop_products')) || [];
+
+    form.onsubmit = (e) => {
+        e.preventDefault();
+        const newProd = {
+            id: Date.now(),
+            name: document.getElementById('name').value,
+            price: document.getElementById('price').value,
+            img: document.getElementById('imgUrl').value,
+            stock: parseInt(document.getElementById('stock').value)
+        };
+        products.push(newProd);
+        saveAndRender();
+        form.reset();
+    };
+
+    function deleteItem(id) {
+        products = products.filter(p => p.id !== id);
+        saveAndRender();
+    }
+
+    function saveAndRender() {
+        localStorage.setItem('shop_products', JSON.stringify(products));
+        const list = document.getElementById('inventory-list');
+        list.innerHTML = products.map(p => `
+            <tr>
+                <td><img src="${p.img}" class="img-preview" onerror="this.src='https://via.placeholder.com/50'"></td>
+                <td>${p.name}</td>
+                <td>$${p.price}</td>
+                <td>${p.stock}</td>
+                <td><button style="background:red" onclick="deleteItem(${p.id})">Delete</button></td>
+            </tr>
+        `).join('');
+    }
+
+    saveAndRender();
+</script>
+</body>
+</html>
