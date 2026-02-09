@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsDesk | Admin Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+    <div id="auth-container" class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-slate-50 to-indigo-50">
+        
+        <div id="login-view" class="max-w-md w-full bg-white rounded-3xl shadow-2xl p-8 border border-slate-100 text-center">
+            <div class="bg-indigo-600 w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-indigo-200">
+                <i data-lucide="shield-check" class="text-white w-8 h-8"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800 tracking-tight">Welcome Back</h2>
+            <p class="text-slate-500 mt-2 mb-8">Access the NewsDesk Command Center</p>
+            
+            <form id="login-form" class="space-y-4 text-left">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Email</label>
+                    <input type="email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="admin@newsdesk.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Password</label>
+                    <input type="password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="••••••••">
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all active:scale-[0.98]">
+                    Sign In
+                </button>
+            </form>
+            <p class="mt-6 text-sm text-slate-500">
+                New admin? <button onclick="toggleAuth('register')" class="text-indigo-600 font-bold hover:underline">Create an account</button>
+            </p>
+        </div>
+
+        <div id="register-view" class="hidden max-w-md w-full bg-white rounded-3xl shadow-2xl p-8 border border-slate-100">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-800 tracking-tight">Register Admin</h2>
+                <p class="text-slate-500 mt-2 italic">Set up your management credentials</p>
+            </div>
+            
+            <form id="register-form" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">First Name</label>
+                        <input type="text" id="reg-fn" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="Jane">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Last Name</label>
+                        <input type="text" id="reg-ln" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="Smith">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Official Email</label>
+                    <input type="email" id="reg-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="jane.smith@company.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Admin Invite Code</label>
+                    <input type="text" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-red-400 outline-none transition border-dashed" placeholder="EX: ADMIN-2026-X">
+                    <p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-widest">Required for authorization</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Password</label>
+                    <input type="password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="••••••••">
+                </div>
+                <button type="submit" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3.5 rounded-xl shadow-lg transition-all active:scale-[0.98]">
+                    Complete Registration
+                </button>
+            </form>
+            <p class="mt-6 text-center text-sm text-slate-500">
+                Already registered? <button onclick="toggleAuth('login')" class="text-indigo-600 font-bold hover:underline">Log in here</button>
+            </p>
+        </div>
+    </div>
+
+    <div id="dashboard-layout" class="hidden flex min-h-screen">
+        <aside class="w-64 bg-white border-r border-slate-200 flex flex-col fixed h-full">
+            <div class="p-6 text-2xl font-black text-indigo-600 flex items-center gap-2 italic">
+                <i data-lucide="zap" class="fill-indigo-600"></i> NewsDesk
+            </div>
+            
+            <nav class="flex-1 px-4 mt-4 space-y-1">
+                <button onclick="switchTab('overview')" id="nav-overview" class="w-full flex items-center gap-3 p-3 bg-indigo-50 text-indigo-700 rounded-xl font-semibold transition">
+                    <i data-lucide="layout-grid" class="w-5 h-5"></i> Overview
+                </button>
+                <button onclick="switchTab('admins')" id="nav-admins" class="w-full flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-50 hover:text-slate-800 rounded-xl font-medium transition">
+                    <i data-lucide="users" class="w-5 h-5"></i> Admin Access
+                </button>
+            </nav>
+
+            <div class="p-4 border-t border-slate-100">
+                <div class="bg-indigo-600 text-white p-4 rounded-2xl flex items-center gap-3">
+                    <div id="user-avatar" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-bold">A</div>
+                    <div class="text-xs">
+                        <p id="user-display-name" class="font-bold tracking-wide">Admin User</p>
+                        <p class="opacity-70">Super Admin</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 ml-64">
+            <header class="h-20 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center justify-between px-8 sticky top-0 z-10">
+                <h1 id="page-title" class="text-xl font-bold text-slate-800 italic">System Overview</h1>
+                <button onclick="location.reload()" class="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-red-500 transition">Logout</button>
+            </header>
+
+            <div id="content-overview" class="p-8">
+                <div class="bg-indigo-50 border border-indigo-100 p-8 rounded-3xl">
+                    <h2 class="text-2xl font-bold text-indigo-900">Welcome to your Dashboard</h2>
+                    <p class="text-indigo-600 mt-1">You are now successfully authenticated as a system administrator.</p>
+                </div>
+            </div>
+
+            <div id="content-admins" class="p-8 hidden">
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-50 border-b border-slate-100">
+                            <tr>
+                                <th class="p-5 text-xs font-black uppercase text-slate-400 tracking-wider">Administrator</th>
+                                <th class="p-5 text-xs font-black uppercase text-slate-400 tracking-wider">Role</th>
+                                <th class="p-5 text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // 1. View Toggling (Login vs Register)
+        function toggleAuth(view) {
+            if(view === 'register') {
+                document.getElementById('login-view').classList.add('hidden');
+                document.getElementById('register-view').classList.remove('hidden');
+            } else {
+                document.getElementById('register-view').classList.add('hidden');
+                document.getElementById('login-view').classList.remove('hidden');
+            }
+        }
+
+        // 2. Handle Login
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            enterDashboard("Admin User", "A");
+        });
+
+        // 3. Handle Registration
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fn = document.getElementById('reg-fn').value;
+            const ln = document.getElementById('reg-ln').value;
+            const initials = fn[0] + ln[0];
+            enterDashboard(`${fn} ${ln}`, initials.toUpperCase());
+        });
+
+        // 4. Enter Dashboard Logic
+        function enterDashboard(name, initials) {
+            document.getElementById('auth-container').classList.add('hidden');
+            document.getElementById('dashboard-layout').classList.remove('hidden');
+            
+            // Update Sidebar Profile
+            document.getElementById('user-display-name').innerText = name;
+            document.getElementById('user-avatar').innerText = initials;
+            
+            // Add user to the table
+            addAdminToTable(name, initials);
+        }
+
+        function addAdminToTable(name, initials) {
+            const row = `
+                <tr class="border-b border-slate-50">
+                    <td class="p-5 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold">${initials}</div>
+                        <div><p class="font-bold text-slate-800">${name}</p></div>
+                    </td>
+                    <td class="p-5"><span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-[10px] font-black uppercase">Active Now</span></td>
+                    <td class="p-5 text-right"><i data-lucide="more-vertical" class="text-slate-300"></i></td>
+                </tr>
+            `;
+            document.getElementById('admin-table-body').innerHTML += row;
+            lucide.createIcons();
+        }
+
+        // 5. Tab Switching
+        function switchTab(tab) {
+            document.getElementById('content-overview').classList.add('hidden');
+            document.getElementById('content-admins').classList.add('hidden');
+            document.getElementById('nav-overview').className = "w-full flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-50 rounded-xl font-medium transition";
+            document.getElementById('nav-admins').className = "w-full flex items-center gap-3 p-3 text-slate-500 hover:bg-slate-50 rounded-xl font-medium transition";
+
+            if(tab === 'overview') {
+                document.getElementById('content-overview').classList.remove('hidden');
+                document.getElementById('nav-overview').className = "w-full flex items-center gap-3 p-3 bg-indigo-50 text-indigo-700 rounded-xl font-semibold transition";
+            } else {
+                document.getElementById('content-admins').classList.remove('hidden');
+                document.getElementById('nav-admins').className = "w-full flex items-center gap-3 p-3 bg-indigo-50 text-indigo-700 rounded-xl font-semibold transition";
+            }
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
